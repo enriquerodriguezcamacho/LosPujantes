@@ -241,3 +241,70 @@ footer {
     padding: 10px 20px;
     font-size: 16px;
 }
+
+/* Estilos para los formularios de registro e inicio de sesión */
+#registro-form, #login-form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#registro-form label, #login-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+}
+
+#registro-form input, #login-form input, #registro-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#registro-form button, #login-form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#registro-form p, #login-form p {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+#registro-form a, #login-form a {
+    color: #007aff;
+    text-decoration: none;
+}
+
+#registro-form a:hover, #login-form a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para los desplegables de comunidad y ciudad */
+#registro-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#registro-form select:disabled {
+    background-color: #f8f8f8;
+    color: #999;
+}
