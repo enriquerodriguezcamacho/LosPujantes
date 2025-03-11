@@ -1,0 +1,17 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# Next.js
+.next/
+out/
+
+# Archivos de caché y del sistema
+__pycache__/
+*.log
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración local
+.env
+.vscode/
