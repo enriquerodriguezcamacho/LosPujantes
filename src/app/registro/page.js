@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
-import { registerUser } from "../../services/authService";
+import { useRouter } from "next/navigation";
 import styles from "../../styles/form.module.css";
 
 export default function RegisterPage() {
+  const router = useRouter();
+  
   const [userData, setUserData] = useState({
     username: "",
     email: "",
@@ -18,33 +20,57 @@ export default function RegisterPage() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
 
+  // Maneja cambios en los inputs
   const handleChange = (e) => {
-    setUserData(
-      { ...userData, [e.target.name]: e.target.value });
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
+  // Función para formatear la fecha en YYYY-MM-DD
+  const formatBirthDate = (date) => {
+    if (!date) return null;
+    return date.split("/").reverse().join("-");
+  };
+
+  // Manejo del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
     setError(null);
 
-    console.log("Datos enviados al backend:", userData);
+    const formattedDate = formatBirthDate(userData.birth_date);
 
-    const result = await registerUser(userData);
-    if (result) {
-      setMessage("Registro exitoso");
-      setUserData({
-        username: "",
-        email: "",
-        password: "",
-        first_name: "",
-        last_name: "",
-        birth_date: "",
-        locality: "",
-        municipality: "",
+    // 🔍 Verificar los datos antes de enviarlos
+    console.log("Datos enviados al backend:", { ...userData, birth_date: formattedDate });
+
+    try {
+      const response = await fetch("https://das-p2-backend.onrender.com/api/users/register/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: userData.username,
+          email: userData.email,
+          password: userData.password,
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+          birth_date: formattedDate,
+          locality: userData.locality,
+          municipality: userData.municipality,
+        }),
       });
-    } else {
-      setError("Error en el registro. Verifica los datos e intenta nuevamente.");
+
+      const data = await response.json();
+      console.log("Respuesta del backend:", data); // 🔍 Ver respuesta exacta
+
+      if (!response.ok) {
+        throw new Error(data.detail || "Error en el registro. Verifica los datos.");
+      }
+
+      setMessage("Registro exitoso. Redirigiendo a login...");
+      setTimeout(() => router.push("/login"), 2000);
+      
+    } catch (err) {
+      console.error("Error en el registro:", err.message);
+      setError(err.message);
     }
   };
 
@@ -54,6 +80,7 @@ export default function RegisterPage() {
         <h2>Registro</h2>
         {message && <p className={styles.successMessage}>{message}</p>}
         {error && <p className={styles.errorMessage}>{error}</p>}
+        
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
             <label>Usuario:</label>

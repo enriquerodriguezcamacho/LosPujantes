@@ -1,11 +1,10 @@
 "use client";
 import { useState } from "react";
-import { loginUser } from "../../services/authService";
 import { useRouter } from "next/navigation";
 import styles from "../../styles/form.module.css";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
@@ -14,13 +13,23 @@ export default function LoginPage() {
     e.preventDefault();
     setError(null);
 
-    const response = await loginUser({ email, password });
+    try {
+      const response = await fetch("https://das-p2-backend.onrender.com/api/users/login/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
 
-    if (response) {
-      alert("Inicio de sesión exitoso");
-      router.push("/subastas");
-    } else {
-      setError("Credenciales incorrectas, intenta de nuevo.");
+      if (!response.ok) {
+        throw new Error("Credenciales incorrectas.");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("accessToken", data.access);
+      localStorage.setItem("username", data.username);
+      router.push("/");
+    } catch (err) {
+      setError(err.message);
     }
   };
 
@@ -31,24 +40,12 @@ export default function LoginPage() {
         {error && <p className={styles.errorMessage}>{error}</p>}
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
-            <label>Email:</label>
-            <input 
-              type="email" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              required 
-              className={styles.inputField}
-            />
+            <label>Usuario:</label>
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
           </div>
           <div className={styles.formGroup}>
             <label>Contraseña:</label>
-            <input 
-              type="password" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              required 
-              className={styles.inputField}
-            />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
           <button type="submit" className={styles.btnSubmit}>Iniciar Sesión</button>
         </form>

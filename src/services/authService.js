@@ -27,3 +27,32 @@ export const registerUser = async (userData) => {
     return null;
   }
 };
+
+export async function getUserProfile() {
+    const token = localStorage.getItem("accessToken");
+    
+    if (!token) {
+        console.error("No hay token disponible");
+        return null;
+    }
+
+    try {
+        const response = await fetch("https://das-p2-backend.onrender.com/api/users/profile/", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Error obteniendo el perfil");
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error en getUserProfile:", error);
+        return null;
+    }
+}
+
