@@ -1,0 +1,62 @@
+.container {
+    text-align: center;
+  }
+  
+  .grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .subastaCard {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    width: 250px;
+  }
+  
+  .imagen {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .precio {
+    font-weight: bold;
+    color: green;
+  }
+  
+  .detallesBoton {
+    display: inline-block;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .subastaContainer {
+    text-align: center;
+  }
+  
+  .imagen {
+    width: 200px;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .precio {
+    font-weight: bold;
+    color: green;
+  }
+  
+  .pujarBoton {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

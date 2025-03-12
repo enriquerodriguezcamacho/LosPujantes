@@ -1,0 +1,48 @@
+/* Contenedor principal */
+.userContainer {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Título */
+  .userContainer h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Lista de usuarios */
+  .userList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .userList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .userList li:last-child {
+    border-bottom: none;
+  }
+  
+  /* Botón de cerrar sesión */
+  .logoutButton {
+    margin-top: 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .logoutButton:hover {
+    background-color: #c82333;
+  }
+  
