@@ -27,7 +27,7 @@ export default function LoginPage() {
       const data = await response.json();
       localStorage.setItem("accessToken", data.access);
       localStorage.setItem("username", data.username);
-      router.push("/");
+      router.push("/subastas");
     } catch (err) {
       setError(err.message);
     }
@@ -41,11 +41,11 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
             <label>Usuario:</label>
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+            <input type="text" className={styles.inputField} value={username} onChange={(e) => setUsername(e.target.value)} required />
           </div>
           <div className={styles.formGroup}>
             <label>Contraseña:</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <input type="password" className={styles.inputField} value={password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
           <button type="submit" className={styles.btnSubmit}>Iniciar Sesión</button>
         </form>
