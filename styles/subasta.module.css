@@ -11,7 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #007bff;
+  background-color: #5cadf0;
   color: white;
   padding: 15px;
   border-radius: 8px;
@@ -19,7 +19,7 @@
 
 /* --- Botón de usuario --- */
 .ctaButtonUser {
-  background-color: #ffcc00;
+  background-color: #2667ff;
   color: black;
   padding: 10px 20px;
   font-size: 16px;
@@ -31,7 +31,7 @@
 }
 
 .ctaButtonUser:hover {
-  background-color: #ffdb4d;
+  background-color: #5871fb;
 }
 
 /* --- Barra de búsqueda --- */
@@ -104,7 +104,7 @@
   text-align: center;
   text-decoration: none;
   color: white;
-  background: linear-gradient(135deg, #007bff, #0056b3); /* Degradado azul */
+  background: linear-gradient(135deg, #007bff, #f2f2f2); /* Degradado azul */
   border: none;
   border-radius: 25px;
   cursor: pointer;

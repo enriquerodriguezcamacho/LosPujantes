@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #007bff;
+  background-color: #5afd29;
   color: white;
   padding: 15px;
   border-radius: 8px;
@@ -23,7 +23,7 @@
 
 /* Botón de usuario */
 .ctaButtonUser {
-  background-color: #ffcc00;
+  background-color: #1900ff;
   color: black;
   padding: 10px 20px;
   font-size: 16px;
@@ -35,7 +35,7 @@
 }
 
 .ctaButtonUser:hover {
-  background-color: #ffdb4d;
+  background-color: #564dff;
 }
 
 /* Botones de navegación */
@@ -91,7 +91,7 @@
   display: block;
   margin-top: 10px;
   padding: 8px 12px;
-  background-color: #28a745;
+  background-color: #4977f6;
   color: white;
   text-decoration: none;
   border-radius: 5px;
