@@ -1,62 +1,220 @@
-.container {
-    text-align: center;
-  }
-  
-  .grid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .subastaCard {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    width: 250px;
-  }
-  
-  .imagen {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-  .precio {
-    font-weight: bold;
-    color: green;
-  }
-  
-  .detallesBoton {
-    display: inline-block;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 10px;
-  }
-  
-  .subastaContainer {
-    text-align: center;
-  }
-  
-  .imagen {
-    width: 200px;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-  .precio {
-    font-weight: bold;
-    color: green;
-  }
-  
-  .pujarBoton {
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+/* --- Estilos generales --- */
+.mainSubastas {
+  text-align: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+}
+
+/* --- Header con navegación --- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* --- Botón de usuario --- */
+.ctaButtonUser {
+  background-color: #ffcc00;
+  color: black;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.ctaButtonUser:hover {
+  background-color: #ffdb4d;
+}
+
+/* --- Barra de búsqueda --- */
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.searchInput {
+  width: 80%;
+  max-width: 700px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: #007bff;
+}
+
+/* --- Contenedor de subastas --- */
+.subastasContainer {
+  margin-top: 20px;
+}
+
+/* --- Fila de subastas (de izquierda a derecha) --- */
+.subastasGrid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+/* --- Tarjeta de subasta --- */
+.subastaItem {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.subastaItem:hover {
+  transform: scale(1.05);
+}
+
+.subastaItem img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* --- Botón "Ver Detalles" mejorado --- */
+.verDetalles {
+  display: inline-block;
+  width: 90%;
+  padding: 12px;
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(135deg, #007bff, #0056b3); /* Degradado azul */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.verDetalles:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #0056b3, #003f7f); /* Cambio de color */
+}
+
+/* ------------------------------------- */
+/* --- Página de Detalles `[id]` --- */
+/* ------------------------------------- */
+
+.subastaContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+/* --- Tarjeta de Subasta Individual --- */
+.subastaCard {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Imagen de la Subasta (Más Pequeña y Centrada) --- */
+.imagen {
+  width: 60%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+/* --- Información de la Subasta --- */
+.detalles h1 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.descripcion {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+  padding: 0 15px;
+}
+
+.precio {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* --- Contenedor de Puja --- */
+.pujaContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* --- Input para Puja --- */
+.pujaInput {
+  width: 120px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.pujaInput:focus {
+  border-color: #007bff;
+}
+
+/* --- Botón de Pujar --- */
+.pujarBoton {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pujarBoton:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #0056b3, #003f7f);
+}

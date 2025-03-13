@@ -1,51 +1,102 @@
+/* Contenedor principal */
 .container {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .subastaGrid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  .subastaCard {
-    background: white;
-    border-radius: 10px;
-    padding: 15px;
-    width: 250px;
-    text-align: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .subastaCard:hover {
-    transform: scale(1.05);
-  }
-  
-  .subastaImg {
-    width: 100%;
-    height: auto;
-    max-height: 150px;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-  
-  .verDetalles {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 15px;
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .verDetalles:hover {
-    background: linear-gradient(135deg, #0056b3, #004099);
-  }
-  
+  text-align: center;
+  padding: 20px;
+}
+
+/* Header con navegación */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  gap: 15px;
+}
+
+/* Botón de usuario */
+.ctaButtonUser {
+  background-color: #ffcc00;
+  color: black;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.ctaButtonUser:hover {
+  background-color: #ffdb4d;
+}
+
+/* Botones de navegación */
+.ctaButton {
+  background-color: white;
+  color: #007bff;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: #e6e6e6;
+}
+
+/* Mensaje de bienvenida al usuario */
+.userWelcome {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Contenedor de subastas */
+.subastaGrid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.subastaCard {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  text-align: center;
+}
+
+.subastaImg {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Botón de ver detalles */
+.verDetalles {
+  display: block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.verDetalles:hover {
+  background-color: #218838;
+}
