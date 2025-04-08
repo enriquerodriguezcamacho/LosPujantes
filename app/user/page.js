@@ -1,49 +1,43 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "../../styles/user.module.css";
+import InitTemplate from "@/components/InitTemplate/InitTemplate";
+import styles from "./page.module.css";
 
 export default function UserPage() {
-  const [user, setUser] = useState(null);
+  const [username, setUsername] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (!token) {
+    const user = localStorage.getItem("username");
+    if (!user) {
       router.push("/login");
-      return;
+    } else {
+      setUsername(user);
     }
+  }, [router]);
 
-    fetch("https://das-p2-backend.onrender.com/api/users/profile/", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => setUser(data))
-      .catch(() => {
-        localStorage.removeItem("accessToken");
-        router.push("/login");
-      });
-  }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("username");
+    router.push("/login");
+  };
 
   return (
-    <div className={styles.userContainer}>
-      <h2>Perfil de Usuario</h2>
-      {user ? (
-        <div>
-          <p><strong>Usuario:</strong> {user.username}</p>
-          <p><strong>Email:</strong> {user.email}</p>
-          <button className={styles.logoutButton} onClick={() => {
-            localStorage.removeItem("accessToken");
-            setUser(null);
-            router.push("/login");
-          }}>
-            Cerrar Sesión
-          </button>
-        </div>
-      ) : (
-        <p>Cargando datos del usuario...</p>
-      )}
-    </div>
+    <InitTemplate>
+      <div className={styles.userContainer}>
+        {username ? (
+          <>
+            <p className={styles.welcomeText}>Bienvenido, <strong>{username}</strong></p>
+            <button onClick={handleLogout} className={styles.logoutButton}>
+              Cerrar sesión
+            </button>
+          </>
+        ) : (
+          <p>Cargando...</p>
+        )}
+      </div>
+    </InitTemplate>
   );
 }

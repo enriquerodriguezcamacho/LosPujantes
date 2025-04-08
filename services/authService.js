@@ -4,55 +4,49 @@ const API_URL = "https://das-p2-backend.onrender.com/api/users";
 
 export const registerUser = async (userData) => {
   try {
-    console.log("Enviando datos de registro:", userData); // Para depuración
-
-    const response = await axios.post(`${API_URL}/register`, userData, {
+    const response = await axios.post(`${API_URL}/register/`, userData, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-
-    console.log("Registro exitoso:", response.data);
     return response.data;
   } catch (error) {
-    console.error("Error en el registro:");
-
-    if (error.response) {
-      console.error("Código de estado:", error.response.status);
-      console.error("Mensaje del backend:", error.response.data);
-    } else {
-      console.error("Error sin respuesta del backend:", error.message);
-    }
-
+    console.error("Error en el registro:", error.response?.data || error.message);
     return null;
   }
 };
 
-export async function getUserProfile() {
-    const token = localStorage.getItem("accessToken");
-    
-    if (!token) {
-        console.error("No hay token disponible");
-        return null;
-    }
+export const loginUser = async (username, password) => {
+  try {
+    const response = await axios.post(`${API_URL}/login/`, { username, password }, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error en login:", error.response?.data || error.message);
+    return { error: "Credenciales incorrectas" };
+  }
+};
 
-    try {
-        const response = await fetch("https://das-p2-backend.onrender.com/api/users/profile/", {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        });
+export const getUserProfile = async () => {
+  const token = localStorage.getItem("token");
 
-        if (!response.ok) {
-            throw new Error("Error obteniendo el perfil");
-        }
+  if (!token) {
+    console.error("Token no encontrado");
+    return null;
+  }
 
-        return await response.json();
-    } catch (error) {
-        console.error("Error en getUserProfile:", error);
-        return null;
-    }
-}
-
+  try {
+    const response = await axios.get(`${API_URL}/profile/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener perfil:", error.response?.data || error.message);
+    return null;
+  }
+};

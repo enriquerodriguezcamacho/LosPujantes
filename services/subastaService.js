@@ -22,8 +22,14 @@ const subastas = [
   },
 ];
 
-export async function getSubastas() {
+export const getSubastas = async () => {
+  // Aquí puedes cambiar a fetch real si conectas con backend
   return new Promise((resolve) => {
     setTimeout(() => resolve(subastas), 1000);
   });
-}
+};
+
+export const getSubastaById = async (id) => {
+  const all = await getSubastas();
+  return all.find((item) => item.id === Number(id));
+};

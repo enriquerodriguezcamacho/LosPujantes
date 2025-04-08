@@ -1,37 +1,57 @@
 "use client";
+
 import { useEffect, useState } from "react";
-import { getSubastas } from "../services/subastasService";
-import styles from "../styles/page.module.css";
+import styles from "./page.module.css";
+import InitTemplate from "@/components/InitTemplate/InitTemplate";
+import Card from "@/components/Card/Card";
 import Link from "next/link";
+import subastasData from "@/data/subastas";
 
 export default function HomePage() {
   const [subastas, setSubastas] = useState([]);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
-    getSubastas().then(setSubastas);
+    setSubastas(subastasData);
+    const storedUser = localStorage.getItem("username");
+    if (storedUser) setUsername(storedUser);
   }, []);
 
   return (
-    <div className={styles.container}>
-      <h1>Bienvenido a Subastas Online</h1>
-      <h2>Subastas Destacadas</h2>
-      {subastas.length === 0 ? (
-        <p className={styles.noSubastas}>No hay subastas disponibles en este momento.</p>
-      ) : (
-        <div className={styles.subastaGrid}>
-          {subastas.map((subasta) => (
-            <div key={subasta.id} className={styles.subastaCard}>
-              <img src={subasta.imagen} alt={subasta.nombre} className={styles.subastaImg} />
-              <h3>{subasta.nombre}</h3>
-              <p>{subasta.descripcion}</p>
-              <p><strong>Precio actual:</strong> {subasta.precio}</p>
-              <Link href={`/subastas/${subasta.id}`}>
-                <button className={styles.verDetalles}>Ver detalles</button>
-              </Link>
-            </div>
-          ))}
+    <InitTemplate>
+      <div className={styles.container}>
+        <h1 className={styles.title}>
+          Bienvenido a Subastas Online{" "}
+          {username && (
+            <Link href="/user">
+              <button className={styles.userButton}>{username}</button>
+            </Link>
+          )}
+        </h1>
+        <h2 className={styles.subtitle}>Subastas Destacadas</h2>
+
+        <div className={styles.grid}>
+          {subastas.length === 0 ? (
+            <p>No hay subastas disponibles.</p>
+          ) : (
+            subastas.map((subasta) => (
+              <Card key={subasta.id}>
+                <img
+                  src={subasta.imagen}
+                  alt={subasta.nombre}
+                  className={styles.image}
+                />
+                <h3>{subasta.nombre}</h3>
+                <p>{subasta.descripcion}</p>
+                <p><strong>Precio actual:</strong> {subasta.precio}</p>
+                <Link href={`/auctions/${subasta.id}`}>
+                  <button className={styles.button}>Ver detalles</button>
+                </Link>
+              </Card>
+            ))
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </InitTemplate>
   );
 }
