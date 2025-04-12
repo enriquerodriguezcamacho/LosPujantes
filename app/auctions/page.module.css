@@ -9,6 +9,38 @@
   font-size: 1.8rem;
   color: #007bff;
   margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  align-items: flex-end;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.filterGroup label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+}
+
+.filterGroup input,
+.filterGroup select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-width: 200px;
+  font-size: 0.95rem;
 }
 
 .searchBar {

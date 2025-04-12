@@ -5,14 +5,25 @@ import styles from "./page.module.css";
 import InitTemplate from "@/components/InitTemplate/InitTemplate";
 import Card from "@/components/Card/Card";
 import Link from "next/link";
-import subastasData from "@/data/subastas";
 
 export default function HomePage() {
   const [subastas, setSubastas] = useState([]);
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    setSubastas(subastasData);
+    const token = localStorage.getItem("access_token");
+
+    fetch("http://127.0.0.1:8000/api/auctions/", {
+      headers: token
+        ? {
+            Authorization: `Bearer ${token}`,
+          }
+        : {},
+    })
+      .then((res) => res.json())
+      .then((data) => setSubastas(data.results || data))
+      .catch((err) => console.error("Error al obtener subastas:", err));
+
     const storedUser = localStorage.getItem("username");
     if (storedUser) setUsername(storedUser);
   }, []);
@@ -37,13 +48,15 @@ export default function HomePage() {
             subastas.map((subasta) => (
               <Card key={subasta.id}>
                 <img
-                  src={subasta.imagen}
-                  alt={subasta.nombre}
+                  src={subasta.thumbnail}
+                  alt={subasta.title}
                   className={styles.image}
                 />
-                <h3>{subasta.nombre}</h3>
-                <p>{subasta.descripcion}</p>
-                <p><strong>Precio actual:</strong> {subasta.precio}</p>
+                <h3>{subasta.title}</h3>
+                <p>{subasta.description}</p>
+                <p>
+                  <strong>Precio actual:</strong> {subasta.price}€
+                </p>
                 <Link href={`/auctions/${subasta.id}`}>
                   <button className={styles.button}>Ver detalles</button>
                 </Link>

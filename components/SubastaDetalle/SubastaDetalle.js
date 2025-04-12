@@ -1,23 +1,44 @@
-import React from "react";
+"use client";
+
+import { useState } from "react";
 import styles from "./styles.module.css";
 
-const SubastaDetalle = ({ subasta, puja, setPuja, onPujar }) => {
+export default function SubastaDetalle({ subasta, onPujar }) {
+  const [puja, setPuja] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!puja || Number(puja) <= 0) {
+      alert("Introduce una puja válida.");
+      return;
+    }
+    onPujar(puja);
+    setPuja("");
+  };
+
   return (
     <div className={styles.container}>
-      <img src={subasta.imagen} alt={subasta.nombre} className={styles.imagen} />
-      <h1>{subasta.nombre}</h1>
-      <p>{subasta.descripcion}</p>
-      <p className={styles.precio}><strong>Precio actual:</strong> {subasta.precio}</p>
-      <input
-        type="number"
-        placeholder="Introduce tu puja"
-        value={puja}
-        onChange={(e) => setPuja(e.target.value)}
-        className={styles.pujaInput}
+      <img
+        src={subasta.thumbnail}
+        alt={subasta.title}
+        className={styles.image}
       />
-      <button className={styles.pujarBoton} onClick={onPujar}>Pujar</button>
+      <h2>{subasta.title}</h2>
+      <p><strong>Descripción:</strong> {subasta.description}</p>
+      <p><strong>Precio actual:</strong> {subasta.price}€</p>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <input
+          type="number"
+          min="1"
+          value={puja}
+          onChange={(e) => setPuja(e.target.value)}
+          placeholder="Introduce tu puja"
+          className={styles.input}
+        />
+        <button type="submit" className={styles.button}>
+          Pujar
+        </button>
+      </form>
     </div>
   );
-};
-
-export default SubastaDetalle;
+}
