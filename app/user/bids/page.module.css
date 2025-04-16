@@ -1,0 +1,54 @@
+.container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #0056b3;
+    text-align: center;
+  }
+  
+  .bidList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .bidItem {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .buttons {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .buttons button {
+    padding: 0.5rem 1rem;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .buttons button:first-child {
+    background-color: #007bff;
+  }
+  
+  .buttons button:last-child {
+    background-color: #dc3545;
+  }
+  

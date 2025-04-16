@@ -1,15 +1,26 @@
 // app/auctions/utils.js
 
+// app/auctions/utils.js
+
 export const getAuctions = async () => {
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/auctions/");
-    const data = await response.json();
-    return data.results || [];
+    let allAuctions = [];
+    let nextUrl = "http://127.0.0.1:8000/api/auctions/";
+
+    while (nextUrl) {
+      const response = await fetch(nextUrl);
+      const data = await response.json();
+      allAuctions = [...allAuctions, ...(data.results || [])];
+      nextUrl = data.next;
+    }
+
+    return allAuctions;
   } catch (error) {
     console.error("Error al obtener subastas:", error);
     return [];
   }
 };
+
 
 export const getCategories = async () => {
   try {
@@ -45,14 +56,25 @@ export const getAuctionById = async (id) => {
 
 export const getBidsByAuctionId = async (auctionId) => {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/auctions/${auctionId}/bid/`);
+    const token = localStorage.getItem("access");
+
+    const response = await fetch(`http://127.0.0.1:8000/api/auctions/${auctionId}/bid/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     if (!response.ok) throw new Error("No se pudieron cargar las pujas");
-    return await response.json();
+
+    const data = await response.json();
+
+    return Array.isArray(data) ? data : (data.results || []);
   } catch (error) {
     console.error("Error al obtener pujas:", error);
     return [];
   }
 };
+
 
 export const createBid = async (auctionId, price, token) => {
   try {

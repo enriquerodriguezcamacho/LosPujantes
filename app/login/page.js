@@ -1,18 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import InitTemplate from "@/components/InitTemplate/InitTemplate";
 import styles from "./page.module.css";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [credentials, setCredentials] = useState({ username: "", password: "" });
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const handleChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,21 +19,21 @@ export default function LoginPage() {
       const response = await fetch("http://127.0.0.1:8000/api/token/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credentials),
+        body: JSON.stringify({ username, password }),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        setError("Credenciales inválidas.");
-        return;
+        throw new Error("Credenciales inválidas");
       }
 
-      localStorage.setItem("accessToken", data.access);
-      localStorage.setItem("username", credentials.username);
-      router.push("/auctions");
+      const data = await response.json();
+      localStorage.setItem("access", data.access);
+      localStorage.setItem("refresh", data.refresh);
+      localStorage.setItem("username", username);
+
+      router.push("/");
     } catch (err) {
-      setError("Error al conectar con el servidor.");
+      setError(err.message);
     }
   };
 
@@ -47,22 +44,20 @@ export default function LoginPage() {
         {error && <p className={styles.error}>{error}</p>}
         <form onSubmit={handleSubmit} className={styles.form}>
           <input
-            name="username"
             type="text"
-            placeholder="Usuario"
-            value={credentials.username}
-            onChange={handleChange}
+            placeholder="Nombre de usuario"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
           <input
-            name="password"
             type="password"
             placeholder="Contraseña"
-            value={credentials.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Entrar</button>
+          <button type="submit" className={styles.button}>Entrar</button>
         </form>
       </div>
     </InitTemplate>

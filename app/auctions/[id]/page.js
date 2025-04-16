@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Card from "@/components/Card/Card";
-import { getAuctionById, getBidsByAuctionId, createBid } from "../utils";
+import { getAuctionById, getBidsByAuctionId } from "../utils";
 
 export default function AuctionDetail() {
   const { id } = useParams();
@@ -23,10 +23,10 @@ export default function AuctionDetail() {
       const data = await getBidsByAuctionId(id);
       setBids(data);
     };
-    
 
     const storedUser = localStorage.getItem("username");
     const storedToken = localStorage.getItem("access");
+
     if (storedUser && storedToken) {
       setUsuario(storedUser);
       setToken(storedToken);
@@ -43,7 +43,28 @@ export default function AuctionDetail() {
     }
 
     try {
-      await createBid(id, parseFloat(puja), token);
+      const response = await fetch(`http://127.0.0.1:8000/api/auctions/${id}/bid/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          price: parseFloat(puja),
+        }),
+      });
+
+      if (!response.ok) {
+        const contentType = response.headers.get("Content-Type");
+        if (contentType && contentType.includes("application/json")) {
+          const err = await response.json();
+          throw new Error(JSON.stringify(err));
+        } else {
+          const text = await response.text();
+          throw new Error(`Respuesta no JSON: ${text}`);
+        }
+      }
+
       setPuja("");
       const updated = await getBidsByAuctionId(id);
       setBids(updated);

@@ -47,3 +47,19 @@
 .userButton:hover {
   background-color: #3399ff;
 }
+
+.logoutButton {
+  background-color: #ff4d4d;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #cc0000;
+}
