@@ -5,7 +5,7 @@
 export const getAuctions = async () => {
   try {
     let allAuctions = [];
-    let nextUrl = "http://127.0.0.1:8000/api/auctions/";
+    let nextUrl = "https://lospujantesbackend-l89k.onrender.com/api/auctions/";
 
     while (nextUrl) {
       const response = await fetch(nextUrl);
@@ -24,7 +24,7 @@ export const getAuctions = async () => {
 
 export const getCategories = async () => {
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/auctions/categories/");
+    const response = await fetch("https://lospujantesbackend-l89k.onrender.com/api/auctions/categories/");
     const data = await response.json();
 
     if (data.results && Array.isArray(data.results)) {
@@ -45,7 +45,7 @@ export const getCategories = async () => {
 
 export const getAuctionById = async (id) => {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/auctions/${id}/`);
+    const response = await fetch(`https://lospujantesbackend-l89k.onrender.com/api/auctions/${id}/`);
     if (!response.ok) throw new Error("No se pudo cargar la subasta");
     return await response.json();
   } catch (error) {
@@ -58,7 +58,7 @@ export const getBidsByAuctionId = async (auctionId) => {
   try {
     const token = localStorage.getItem("access");
 
-    const response = await fetch(`http://127.0.0.1:8000/api/auctions/${auctionId}/bid/`, {
+    const response = await fetch(`https://lospujantesbackend-l89k.onrender.com/api/auctions/${auctionId}/bid/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -78,7 +78,7 @@ export const getBidsByAuctionId = async (auctionId) => {
 
 export const createBid = async (auctionId, price, token) => {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/auctions/${auctionId}/bid/`, {
+    const response = await fetch(`https://lospujantesbackend-l89k.onrender.com/api/auctions/${auctionId}/bid/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

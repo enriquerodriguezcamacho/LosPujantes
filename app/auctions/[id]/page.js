@@ -43,7 +43,7 @@ export default function AuctionDetail() {
     }
 
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/auctions/${id}/bid/`, {
+      const response = await fetch(`https://lospujantesbackend-l89k.onrender.com/api/auctions/${id}/bid/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
