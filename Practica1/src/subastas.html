@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subastas</title>4
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <span class="breadcrumb"> <a href="index.html">Inicio</a> > <strong>Subastas</strong> </span>
+        </nav>
+        <h1>Resultados de Búsqueda</h1>
+        <div class="search-bar">
+            <input type="text" id="searchBar" placeholder="Buscar subastas...">
+            <button onclick="buscarSubasta()">Buscar</button>
+        </div>
+    </header>
+    
+    <main>
+        <section id="resultados">
+            <h2>Subastas encontradas</h2>
+            <div id="subastas-container">
+                <!-- Aquí se insertarán dinámicamente los resultados -->
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Subastas Online</p>
+    </footer>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>

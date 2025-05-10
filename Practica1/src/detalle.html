@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Subasta - Subastas Online</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <span class="breadcrumb"> <a href="index.html">Inicio</a> > <a href="subastas.html">Subastas</a> > <strong>Detalle</strong> </span>
+        </nav>
+        <h1>Detalle de la Subasta</h1>
+    </header>
+    
+    <main>
+        <div class="auction-detail">
+            <img src="" alt="Imagen del Producto" id="auction-image">
+            <h1 id="auction-title"></h1>
+            <p id="auction-description"></p>
+            <div class="auction-info">
+                <p><strong>Precio de inicio:</strong> <span id="auction-price"></span></p>
+                <p><strong>Años del producto:</strong> <span id="auction-age"></span></p>
+                <p><strong>Estado:</strong> <span id="auction-condition"></span></p>
+                <p><strong>Material:</strong> <span id="auction-material"></span></p>
+                <p><strong>Color:</strong> <span id="auction-color"></span></p>
+            </div>
+            <div class="bid-section">
+                <input type="number" placeholder="Importe de la puja" class="bid-input">
+                <button class="bid-button">Pujar</button>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Subastas Online</p>
+    </footer>
+    
+    <script src="js/detalle.js"></script>
+</body>
+</html>
